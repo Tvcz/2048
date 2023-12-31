@@ -45,10 +45,6 @@ export class Grid {
     }
     // Inserts a tile at its position
     insertTile(tile) {
-        console.log("Inserting tile: " +
-            JSON.stringify(tile) +
-            " at position: " +
-            JSON.stringify(tile.position));
         this.cells.set(tile.position.toString(), tile);
         if (!this.tiles.find((t) => t == tile)) {
             this.tiles.push(tile);

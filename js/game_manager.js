@@ -109,7 +109,6 @@ export class GameManager {
     }
     // Move a tile and its representation
     moveTile(tile, position) {
-        console.log("moveTile", tile, position);
         this.grid.moveTile(tile, position);
     }
     // Move tiles on the grid in the specified direction

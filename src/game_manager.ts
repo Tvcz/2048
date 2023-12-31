@@ -145,7 +145,6 @@ export class GameManager {
 
   // Move a tile and its representation
   moveTile(tile: Tile, position: Position) {
-    console.log("moveTile", tile, position);
     this.grid.moveTile(tile, position);
   }
 
