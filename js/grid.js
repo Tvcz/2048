@@ -1,117 +1,96 @@
-function Grid(size, previousState) {
-  this.size = size;
-  this.cells = previousState ? this.fromState(previousState) : this.empty();
+import { Position } from "./position.js";
+import { buildTileFromSerialized } from "./tile.js";
+export class Grid {
+    constructor(size) {
+        this.size = size;
+        this.cells = new Map();
+        this.tiles = [];
+    }
+    // Find the first available random position
+    randomAvailablePosition() {
+        let positions = this.availablePositions();
+        if (positions.length) {
+            return positions[Math.floor(Math.random() * positions.length)];
+        }
+    }
+    // Get all the available cells in the grid
+    availablePositions() {
+        let positions = [];
+        for (let x = 0; x < this.size; x++) {
+            for (let y = 0; y < this.size; y++) {
+                let position = new Position(x, y);
+                if (!this.cells.has(position.toString())) {
+                    positions.push(position);
+                }
+            }
+        }
+        return positions;
+    }
+    // Check if there are any cells available
+    cellsAvailable() {
+        return !!this.availablePositions().length;
+    }
+    // Check if the specified cell is taken
+    positionAvailable(position) {
+        return this.cellContent(position) == null;
+    }
+    // get the tile at the specified cell position, or null if empty
+    cellContent(position) {
+        if (this.withinBounds(position)) {
+            return this.cells.get(position.toString()) || null;
+        }
+        else {
+            return null;
+        }
+    }
+    // Inserts a tile at its position
+    insertTile(tile) {
+        console.log("Inserting tile: " +
+            JSON.stringify(tile) +
+            " at position: " +
+            JSON.stringify(tile.position));
+        this.cells.set(tile.position.toString(), tile);
+        if (!this.tiles.find((t) => t == tile)) {
+            this.tiles.push(tile);
+        }
+    }
+    // Remove a tile from the grid
+    removeTile(tile) {
+        this.cells.delete(tile.position.toString());
+        this.tiles = this.tiles.filter((t) => t != tile);
+    }
+    withinBounds(position) {
+        return (position.x >= 0 &&
+            position.x < this.size &&
+            position.y >= 0 &&
+            position.y < this.size);
+    }
+    serialize() {
+        let tiles = this.tiles.map((tile) => {
+            return tile.serialize();
+        });
+        return {
+            size: this.size,
+            tiles: tiles,
+        };
+    }
+    // Runs the specified callback for every cell in the grid
+    eachTile(callback) {
+        this.cells.forEach((tile) => {
+            callback(tile);
+        });
+    }
+    moveTile(tile, position) {
+        this.cells.delete(tile.position.toString());
+        this.cells.set(position.toString(), tile);
+        tile.updatePosition(position);
+    }
 }
-
-// Build a grid of the specified size
-Grid.prototype.empty = function () {
-  var cells = [];
-
-  for (var x = 0; x < this.size; x++) {
-    var row = cells[x] = [];
-
-    for (var y = 0; y < this.size; y++) {
-      row.push(null);
-    }
-  }
-
-  return cells;
-};
-
-Grid.prototype.fromState = function (state) {
-  var cells = [];
-
-  for (var x = 0; x < this.size; x++) {
-    var row = cells[x] = [];
-
-    for (var y = 0; y < this.size; y++) {
-      var tile = state[x][y];
-      row.push(tile ? new Tile(tile.position, tile.value) : null);
-    }
-  }
-
-  return cells;
-};
-
-// Find the first available random position
-Grid.prototype.randomAvailableCell = function () {
-  var cells = this.availableCells();
-
-  if (cells.length) {
-    return cells[Math.floor(Math.random() * cells.length)];
-  }
-};
-
-Grid.prototype.availableCells = function () {
-  var cells = [];
-
-  this.eachCell(function (x, y, tile) {
-    if (!tile) {
-      cells.push({ x: x, y: y });
-    }
-  });
-
-  return cells;
-};
-
-// Call callback for every cell
-Grid.prototype.eachCell = function (callback) {
-  for (var x = 0; x < this.size; x++) {
-    for (var y = 0; y < this.size; y++) {
-      callback(x, y, this.cells[x][y]);
-    }
-  }
-};
-
-// Check if there are any cells available
-Grid.prototype.cellsAvailable = function () {
-  return !!this.availableCells().length;
-};
-
-// Check if the specified cell is taken
-Grid.prototype.cellAvailable = function (cell) {
-  return !this.cellOccupied(cell);
-};
-
-Grid.prototype.cellOccupied = function (cell) {
-  return !!this.cellContent(cell);
-};
-
-Grid.prototype.cellContent = function (cell) {
-  if (this.withinBounds(cell)) {
-    return this.cells[cell.x][cell.y];
-  } else {
-    return null;
-  }
-};
-
-// Inserts a tile at its position
-Grid.prototype.insertTile = function (tile) {
-  this.cells[tile.x][tile.y] = tile;
-};
-
-Grid.prototype.removeTile = function (tile) {
-  this.cells[tile.x][tile.y] = null;
-};
-
-Grid.prototype.withinBounds = function (position) {
-  return position.x >= 0 && position.x < this.size &&
-         position.y >= 0 && position.y < this.size;
-};
-
-Grid.prototype.serialize = function () {
-  var cellState = [];
-
-  for (var x = 0; x < this.size; x++) {
-    var row = cellState[x] = [];
-
-    for (var y = 0; y < this.size; y++) {
-      row.push(this.cells[x][y] ? this.cells[x][y].serialize() : null);
-    }
-  }
-
-  return {
-    size: this.size,
-    cells: cellState
-  };
-};
+export function buildGridFromSerialized(serialized) {
+    let grid = new Grid(serialized.size);
+    serialized.tiles.forEach((serializedTile) => {
+        let tile = buildTileFromSerialized(serializedTile);
+        grid.insertTile(tile);
+    });
+    return grid;
+}
