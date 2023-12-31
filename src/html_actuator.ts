@@ -3,17 +3,31 @@ import { Position } from "./position.js";
 import { Tile } from "./tile.js";
 
 export class HTMLActuator {
-  tileContainer: HTMLElement;
-  scoreContainer: HTMLElement;
-  bestContainer: HTMLElement;
-  messageContainer: HTMLElement;
+  tileContainer: Element;
+  scoreContainer: Element;
+  bestContainer: Element;
+  messageContainer: Element;
   score: number;
 
   constructor() {
-    this.tileContainer = document.querySelector(".tile-container");
-    this.scoreContainer = document.querySelector(".score-container");
-    this.bestContainer = document.querySelector(".best-container");
-    this.messageContainer = document.querySelector(".game-message");
+    let tileContainer = document.querySelector(".tile-container");
+    let scoreContainer = document.querySelector(".score-container");
+    let bestContainer = document.querySelector(".best-container");
+    let messageContainer = document.querySelector(".game-message");
+
+    if (
+      tileContainer == null ||
+      scoreContainer == null ||
+      bestContainer == null ||
+      messageContainer == null
+    ) {
+      throw new Error("One of the required elements is missing");
+    }
+
+    this.tileContainer = tileContainer;
+    this.scoreContainer = scoreContainer;
+    this.bestContainer = bestContainer;
+    this.messageContainer = messageContainer;
 
     this.score = 0;
   }
@@ -48,7 +62,7 @@ export class HTMLActuator {
     this.clearMessage();
   }
 
-  clearContainer(container) {
+  clearContainer(container: Element) {
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
@@ -111,7 +125,7 @@ export class HTMLActuator {
     return "tile-position-" + position.x + "-" + position.y;
   }
 
-  updateScore(score) {
+  updateScore(score: number) {
     this.clearContainer(this.scoreContainer);
 
     var difference = score - this.score;

@@ -3,7 +3,7 @@
       "outDir": "./js",
       "allowJs": true,
       "target": "es6",
-      "strictNullChecks": false
+      "strictNullChecks": true
     },
     "include": ["./src/**/*"]
   }

@@ -1,10 +1,20 @@
 import { Position } from "./position.js";
 export class HTMLActuator {
     constructor() {
-        this.tileContainer = document.querySelector(".tile-container");
-        this.scoreContainer = document.querySelector(".score-container");
-        this.bestContainer = document.querySelector(".best-container");
-        this.messageContainer = document.querySelector(".game-message");
+        let tileContainer = document.querySelector(".tile-container");
+        let scoreContainer = document.querySelector(".score-container");
+        let bestContainer = document.querySelector(".best-container");
+        let messageContainer = document.querySelector(".game-message");
+        if (tileContainer == null ||
+            scoreContainer == null ||
+            bestContainer == null ||
+            messageContainer == null) {
+            throw new Error("One of the required elements is missing");
+        }
+        this.tileContainer = tileContainer;
+        this.scoreContainer = scoreContainer;
+        this.bestContainer = bestContainer;
+        this.messageContainer = messageContainer;
         this.score = 0;
     }
     actuate(grid, metadata) {

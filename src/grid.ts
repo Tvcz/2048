@@ -14,7 +14,7 @@ export class Grid {
   }
 
   // Find the first available random position
-  randomAvailablePosition(): Position {
+  randomAvailablePosition(): Position | undefined {
     let positions = this.availablePositions();
     if (positions.length) {
       return positions[Math.floor(Math.random() * positions.length)];

@@ -61,8 +61,11 @@ export class GameManager {
     addRandomTile() {
         if (this.grid.cellsAvailable()) {
             let value = Math.random() < 0.9 ? 2 : 4;
-            let tile = new Tile(this.grid.randomAvailablePosition(), value);
-            this.grid.insertTile(tile);
+            let position = this.grid.randomAvailablePosition();
+            if (position !== undefined) {
+                let tile = new Tile(position, value);
+                this.grid.insertTile(tile);
+            }
         }
     }
     // Sends the updated grid to the actuator

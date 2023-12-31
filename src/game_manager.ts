@@ -92,8 +92,11 @@ export class GameManager {
   addRandomTile() {
     if (this.grid.cellsAvailable()) {
       let value = Math.random() < 0.9 ? 2 : 4;
-      let tile = new Tile(this.grid.randomAvailablePosition(), value);
-      this.grid.insertTile(tile);
+      let position = this.grid.randomAvailablePosition();
+      if (position !== undefined) {
+        let tile = new Tile(position, value);
+        this.grid.insertTile(tile);
+      }
     }
   }
 
@@ -150,7 +153,7 @@ export class GameManager {
   move(direction: Direction) {
     if (this.isGameTerminated()) return; // Don't do anything if the game's over
 
-    let position: Position, tile: Tile;
+    let position: Position, tile: Tile | null;
 
     let vector = this.getVector(direction);
     let traversals = this.buildTraversals(vector);
@@ -271,7 +274,7 @@ export class GameManager {
 
   // Check for available matches between tiles (more expensive check)
   tileMatchesAvailable() {
-    let tile: Tile;
+    let tile: Tile | null;
 
     for (let x = 0; x < this.size; x++) {
       for (let y = 0; y < this.size; y++) {
