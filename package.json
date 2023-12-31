@@ -4,8 +4,8 @@
   "type": "module",
   "description": "A rewrite of 2048 in TypeScript.",
   "scripts": {
-    "start": "npx tsc && open index.html",
-    "build": "npx tsc",
+    "start": "npx webpack && live-server",
+    "build": "npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
