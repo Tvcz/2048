@@ -1,0 +1,23 @@
+{
+    "short_name": "2048",
+    "name": "2048: Rewritten",
+    "icons": [
+        {
+            "src": "/images/2048-small.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/images/2048-large.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "background_color": "#faf8ef",
+    "display": "fullscreen",
+    "scope": "/",
+    "theme_color": "#bbada0",
+    "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript",
+}
