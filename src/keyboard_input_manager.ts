@@ -1,9 +1,13 @@
+import TouchSweep from "../node_modules/touchsweep/dist/touchsweep";
+
 export enum Direction {
   Up = 0,
   Right = 1,
   Down = 2,
   Left = 3,
 }
+
+const SWIPE_THRESHOLD = 20;
 
 export class KeyboardInputManager {
   events: Map<KeyboardEvent, (data: any) => void>;
@@ -88,7 +92,10 @@ export class KeyboardInputManager {
 
     // Respond to swipe events
     let touchStartClientX, touchStartClientY;
-    let gameContainer = document.getElementsByClassName("game-container")[0];
+    let gameContainer = document.querySelector<HTMLElement>(".game-container");
+    if (!gameContainer) {
+      throw new Error("No game container found");
+    }
 
     gameContainer.addEventListener(this.eventTouchstart, function (event) {
       if (
@@ -150,6 +157,20 @@ export class KeyboardInputManager {
             : Direction.Up
         );
       }
+    });
+
+    new TouchSweep(gameContainer, {}, SWIPE_THRESHOLD);
+    gameContainer.addEventListener("swipeleft", () => {
+      self.emit("move", Direction.Left);
+    });
+    gameContainer.addEventListener("swiperight", () => {
+      self.emit("move", Direction.Right);
+    });
+    gameContainer.addEventListener("swipeup", () => {
+      self.emit("move", Direction.Up);
+    });
+    gameContainer.addEventListener("swipedown", () => {
+      self.emit("move", Direction.Down);
     });
   };
 

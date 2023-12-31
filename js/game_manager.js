@@ -1,6 +1,6 @@
-import { Grid, buildGridFromSerialized } from "./grid.js";
-import { Position } from "./position.js";
-import { Tile } from "./tile.js";
+import { Grid, buildGridFromSerialized } from "./grid";
+import { Position } from "./position";
+import { Tile } from "./tile";
 export class GameManager {
     constructor(size, InputManager, Actuator, StorageManager) {
         this.size = size; // Size of the grid

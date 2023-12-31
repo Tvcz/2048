@@ -1,10 +1,10 @@
-import { Grid, buildGridFromSerialized } from "./grid.js";
-import { HTMLActuator } from "./html_actuator.js";
-import { KeyboardInputManager, Direction } from "./keyboard_input_manager.js";
-import { LocalStorageManager } from "./local_storage_manager.js";
-import { Position } from "./position.js";
-import { Tile } from "./tile.js";
-import { SerializedGameState } from "./types.js";
+import { Grid, buildGridFromSerialized } from "./grid";
+import { HTMLActuator } from "./html_actuator";
+import { KeyboardInputManager, Direction } from "./keyboard_input_manager";
+import { LocalStorageManager } from "./local_storage_manager";
+import { Position } from "./position";
+import { Tile } from "./tile";
+import { SerializedGameState } from "./types";
 
 export class GameManager {
   size: number;

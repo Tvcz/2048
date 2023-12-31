@@ -1,6 +1,6 @@
-import { Grid } from "./grid.js";
-import { Position } from "./position.js";
-import { Tile } from "./tile.js";
+import { Grid } from "./grid";
+import { Position } from "./position";
+import { Tile } from "./tile";
 
 export class HTMLActuator {
   tileContainer: Element;

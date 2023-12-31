@@ -1,4 +1,4 @@
-import { Position } from "./position.js";
+import { Position } from "./position";
 export class Tile {
     constructor(position, value) {
         this.position = position;

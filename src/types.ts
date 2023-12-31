@@ -1,5 +1,3 @@
-import { Tile } from "./tile.js";
-
 export type SerializedGameState = {
   grid: SerializedGrid;
   score: number;

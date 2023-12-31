@@ -1,5 +1,5 @@
-import { Position } from "./position.js";
-import { buildTileFromSerialized } from "./tile.js";
+import { Position } from "./position";
+import { buildTileFromSerialized } from "./tile";
 export class Grid {
     constructor(size) {
         this.size = size;

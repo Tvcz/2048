@@ -1,4 +1,4 @@
-import { Position } from "./position.js";
+import { Position } from "./position";
 export class HTMLActuator {
     constructor() {
         let tileContainer = document.querySelector(".tile-container");

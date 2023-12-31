@@ -1,5 +1,5 @@
-import { Position } from "./position.js";
-import { SerializedTile } from "./types.js";
+import { Position } from "./position";
+import { SerializedTile } from "./types";
 
 export class Tile {
   position: Position;

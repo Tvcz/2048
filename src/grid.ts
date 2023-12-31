@@ -1,6 +1,6 @@
-import { Position } from "./position.js";
-import { Tile, buildTileFromSerialized } from "./tile.js";
-import { SerializedGrid, SerializedTile } from "./types.js";
+import { Position } from "./position";
+import { Tile, buildTileFromSerialized } from "./tile";
+import { SerializedGrid, SerializedTile } from "./types";
 
 export class Grid {
   size: number;

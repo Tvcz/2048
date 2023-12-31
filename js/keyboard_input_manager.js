@@ -1,3 +1,4 @@
+import TouchSweep from "../node_modules/touchsweep/dist/touchsweep";
 export var Direction;
 (function (Direction) {
     Direction[Direction["Up"] = 0] = "Up";
@@ -5,6 +6,7 @@ export var Direction;
     Direction[Direction["Down"] = 2] = "Down";
     Direction[Direction["Left"] = 3] = "Left";
 })(Direction || (Direction = {}));
+const SWIPE_THRESHOLD = 20;
 export class KeyboardInputManager {
     constructor() {
         this.listen = function () {
@@ -44,7 +46,10 @@ export class KeyboardInputManager {
             this.bindButtonPress(".keep-playing-button", this.keepPlaying);
             // Respond to swipe events
             let touchStartClientX, touchStartClientY;
-            let gameContainer = document.getElementsByClassName("game-container")[0];
+            let gameContainer = document.querySelector(".game-container");
+            if (!gameContainer) {
+                throw new Error("No game container found");
+            }
             gameContainer.addEventListener(this.eventTouchstart, function (event) {
                 if ((!window.PointerEvent && event.touches.length > 1) ||
                     event.targetTouches.length > 1) {
@@ -91,6 +96,19 @@ export class KeyboardInputManager {
                             ? Direction.Down
                             : Direction.Up);
                 }
+            });
+            new TouchSweep(gameContainer, {}, SWIPE_THRESHOLD);
+            gameContainer.addEventListener("swipeleft", () => {
+                self.emit("move", Direction.Left);
+            });
+            gameContainer.addEventListener("swiperight", () => {
+                self.emit("move", Direction.Right);
+            });
+            gameContainer.addEventListener("swipeup", () => {
+                self.emit("move", Direction.Up);
+            });
+            gameContainer.addEventListener("swipedown", () => {
+                self.emit("move", Direction.Down);
             });
         };
         this.bindButtonPress = function (selector, fn) {
