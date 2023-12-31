@@ -19,5 +19,5 @@
     "display": "fullscreen",
     "scope": "/",
     "theme_color": "#bbada0",
-    "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript",
+    "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript"
 }
