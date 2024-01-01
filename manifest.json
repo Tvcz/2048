@@ -3,12 +3,12 @@
     "name": "2048: Rewritten",
     "icons": [
         {
-            "src": "/images/2048-small.png",
+            "src": "/2048/images/2048-small.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/images/2048-large.png",
+            "src": "/2048/images/2048-large.png",
             "type": "image/png",
             "sizes": "512x512"
         }
@@ -16,7 +16,7 @@
     "start_url": "/2048",
     "background_color": "#faf8ef",
     "display": "fullscreen",
-    "scope": "/",
+    "scope": "/2048",
     "theme_color": "#bbada0",
     "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript"
 }
