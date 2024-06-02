@@ -165,6 +165,7 @@ let adjustGameInstructionsForMobile = () => {
         gameExplanation.innerHTML = MOBILE_GAME_INSTRUCTIONS;
     }
 };
+adjustGameInstructionsForMobile();
 
 
 /***/ }),

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "sass": "^1.69.6",
     "touchsweep": "^2.2.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3"
