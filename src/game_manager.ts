@@ -53,7 +53,7 @@ export class GameManager {
 
   // Return true if the game is lost, or has won and the user hasn't kept playing
   isGameTerminated() {
-    return this.over || (this.won && !this.keepPlaying);
+    return this.over || (this.won && !this.shouldKeepPlaying);
   }
 
   // Set up the game
