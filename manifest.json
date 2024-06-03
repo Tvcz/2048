@@ -34,5 +34,10 @@
     ],
     "edge_side_panel": {
         "preferred_width": 325
-    }
+    },
+    "web_apps": [
+        {
+            "web_app_identity": "https://tvcz.github.io/2048/"
+        }
+    ]
 }
