@@ -18,5 +18,18 @@
     "display": "fullscreen",
     "scope": "/2048",
     "theme_color": "#bbada0",
-    "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript"
+    "description": "A rewrite of Gabriele Cirulli's 2048 in TypeScript",
+    "id": "tvcz.2048",
+    "dir": "ltr",
+    "lang": "en",
+    "orientation": "portrait",
+    "display_override": [
+        "minimal-ui",
+        "standalone",
+        "fullscreen",
+        "window-controls-overlay"
+    ],
+    "categories": [
+        "games"
+    ]
 }
