@@ -31,5 +31,8 @@
     ],
     "categories": [
         "games"
-    ]
+    ],
+    "edge_side_panel": {
+        "preferred_width": 325
+    }
 }
